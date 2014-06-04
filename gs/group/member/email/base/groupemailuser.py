@@ -88,3 +88,11 @@ class GroupEmailUser(object):
 
     def set_webonly(self):
         self.query.set_groupEmailSetting('webonly')
+
+    def set_default_delivery(self):
+        self.query.clear_groupEmailSetting()
+        for addr in self.get_specific_email_addresses():
+            self.query.remove_groupUserEmail(addr)
+
+    def add_specific_address(self, address):
+        self.query.add_groupUserEmail(address)

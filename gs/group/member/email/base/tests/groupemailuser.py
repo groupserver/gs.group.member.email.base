@@ -132,3 +132,29 @@ class TestGroupEmailUser(TestCase):
         groupEmailUser.set_webonly()
 
         MockGUEQ.set_groupEmailSetting.assert_called_once_with('webonly')
+
+    def test_set_default_delivery_no_specific_email(self):
+        'Test set_default_delivery when the default email addresses are used'
+        MockGUEQ = self.set_setting('asdfasdf')
+        MockGUEQ.get_groupUserEmail = MagicMock(return_value=[])
+        MockGUEQ.remove_groupUserEmail = MagicMock()
+        MockGUEQ.clear_groupEmailSetting = MagicMock()
+
+        groupEmailUser = GroupEmailUser(self.fauxUser, self.fauxGroup)
+        groupEmailUser.set_default_delivery()
+
+        MockGUEQ.clear_groupEmailSetting.assert_called_once_with()
+        self.assertEqual(0, MockGUEQ.remove_groupUserEmail.call_count)
+
+    def test_set_default_delivery_specific_email(self):
+        'Test set_default_delivery when the specific email addresses are used'
+        MockGUEQ = self.set_setting('asdfasdf')
+        MockGUEQ.get_groupUserEmail = MagicMock(return_value=['eg@example.com'])
+        MockGUEQ.remove_groupUserEmail = MagicMock()
+        MockGUEQ.clear_groupEmailSetting = MagicMock()
+
+        groupEmailUser = GroupEmailUser(self.fauxUser, self.fauxGroup)
+        groupEmailUser.set_default_delivery()
+
+        MockGUEQ.clear_groupEmailSetting.assert_called_once_with()
+        MockGUEQ.remove_groupUserEmail.assert_called_once_with('eg@example.com')
