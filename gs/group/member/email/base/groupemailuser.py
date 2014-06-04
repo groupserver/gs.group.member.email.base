@@ -82,3 +82,9 @@ class GroupEmailUser(object):
         retval = self.query.get_addresses(preferredOnly=True,
                                             verifiedOnly=False)
         return retval
+
+    def set_digest(self):
+        self.query.set_groupEmailSetting('digest')
+
+    def set_webonly(self):
+        self.query.set_groupEmailSetting('webonly')

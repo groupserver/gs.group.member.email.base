@@ -112,3 +112,23 @@ class TestGroupEmailUser(TestCase):
         self.assertEqual(defaultAddresses, r)
         MockGUEQ.get_addresses.assert_called_once_with(preferredOnly=True,
                                                         verifiedOnly=False)
+
+    def test_set_digest(self):
+        MockGUEQ = GroupUserEmailQuery
+        MockGUEQ.__init__ = MagicMock(return_value=None)
+        MockGUEQ.set_groupEmailSetting = MagicMock()
+
+        groupEmailUser = GroupEmailUser(self.fauxUser, self.fauxGroup)
+        groupEmailUser.set_digest()
+
+        MockGUEQ.set_groupEmailSetting.assert_called_once_with('digest')
+
+    def test_set_webonly(self):
+        MockGUEQ = GroupUserEmailQuery
+        MockGUEQ.__init__ = MagicMock(return_value=None)
+        MockGUEQ.set_groupEmailSetting = MagicMock()
+
+        groupEmailUser = GroupEmailUser(self.fauxUser, self.fauxGroup)
+        groupEmailUser.set_webonly()
+
+        MockGUEQ.set_groupEmailSetting.assert_called_once_with('webonly')
