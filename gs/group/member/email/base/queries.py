@@ -29,12 +29,13 @@ class GroupUserEmailQuery(object):
         self.userId = userInfo.id
         self.groupId = groupInfo.id
         self.siteId = groupInfo.siteInfo.id
+        self.emailSettingTable = getTable('email_setting')
         self.groupUserEmailTable = getTable('group_user_email')
         self.userEmailTable = getTable('user_email')
 
         assert self.userId, 'User ID not set'
         assert self.groupId, 'Group ID not set'
-        assert self.siteID, 'Site ID not set'
+        assert self.siteId, 'Site ID not set'
 
     # TODO: https://redmine.iopen.net/issues/3563
     def add_groupUserEmail(self, email_address):
