@@ -14,7 +14,7 @@
 ##############################################################################
 from __future__ import absolute_import, unicode_literals
 from unittest import TestSuite, main as unittest_main
-from gs.profile.email.base.tests.groupemailuser import TestGroupEmailUser
+from gs.group.member.email.base.tests.groupemailuser import TestGroupEmailUser
 testCases = (TestGroupEmailUser, )
 
 
