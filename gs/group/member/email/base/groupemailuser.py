@@ -13,28 +13,9 @@
 #
 ##############################################################################
 from __future__ import absolute_import, unicode_literals
-from enum import Enum
 from zope.cachedescriptors.property import Lazy
 from .queries import GroupUserEmailQuery
-
-
-class GroupEmailSetting(Enum):
-    '''An enumeration of the different group-email settings.'''
-    __order__ = 'webonly default specific digest'  # only needed in 2.x
-
-    #: The user follows the group using the web only (no email is sent).
-    webonly = 0
-
-    #: The user follows the group using his or her default email address
-    #: settings.
-    default = 1
-
-    #: The user follows the group using an email address (or addresses) that is
-    #: (or are) specific to this group
-    specific = 2
-
-    #: The user follows the group using a daily digest of topics
-    digest = 3
+from .settings import GroupEmailSetting
 
 
 class GroupEmailUser(object):

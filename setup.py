@@ -15,6 +15,7 @@
 import codecs
 import os
 from setuptools import setup, find_packages
+import sys
 from version import get_version
 
 version = get_version()
@@ -23,6 +24,14 @@ with codecs.open('README.txt', encoding='utf-8') as f:
     long_description = f.read()
 with codecs.open(os.path.join("docs", "HISTORY.txt"), encoding='utf-8') as f:
     long_description += '\n' + f.read()
+
+requires = [
+        'zope.cachedescriptors',
+        'zope.component',
+]
+if (sys.version_info < (3, 4)):
+    requires += ['setuptools', 'enum34']
+
 
 setup(name='gs.group.member.email.base',
     version=version,
@@ -49,11 +58,7 @@ setup(name='gs.group.member.email.base',
                         'gs.group.member.email'],
     include_package_data=True,
     zip_safe=False,
-    install_requires=[
-        'setuptools',
-        'zope.cachedescriptors',
-        'zope.component',
-    ],
+    install_requires=requires,
     entry_points="""
     # -*- Entry points: -*-
     """,

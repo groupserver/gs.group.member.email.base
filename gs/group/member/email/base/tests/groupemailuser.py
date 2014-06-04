@@ -15,9 +15,9 @@
 from __future__ import absolute_import, unicode_literals
 from mock import MagicMock
 from unittest import TestCase
-from gs.profile.email.base.groupemailuser import (GroupEmailUser,
-                                                    GroupEmailSetting)
-import gs.profile.email.base.groupemailuser  # lint:ok
+from gs.group.member.email.base.groupemailuser import (GroupEmailUser,
+                                                        GroupEmailSetting)
+from gs.group.member.email.base.groupemailuser import GroupUserEmailQuery
 
 
 class FauxInfo(object):
@@ -36,7 +36,7 @@ class TestGroupEmailUser(TestCase):
         self.fauxGroup.siteInfo.id = 'exampleSite'
 
     def set_setting(self, setting):
-        MockGUEQ = gs.profile.email.base.groupemailuser.GroupUserEmailQuery
+        MockGUEQ = GroupUserEmailQuery
         MockGUEQ.__init__ = MagicMock(return_value=None)
         MockGUEQ.get_groupEmailSetting = MagicMock(return_value=setting)
         return MockGUEQ
