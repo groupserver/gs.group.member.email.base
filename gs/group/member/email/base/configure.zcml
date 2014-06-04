@@ -13,4 +13,11 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser"
            i18n_domain="groupserver">
+  <interface interface=".interfaces.IGroupEmailUser" />
+  <adapter
+    provides=".interfaces.IGroupEmailUser"
+    for="Products.CustomUserFolder.interfaces.IGSUserInfo
+         Products.GSGroup.interfaces.IGSGroupInfo"
+    factory=".groupemailuser.GroupEmailUser"
+    permission="zope2.Public" />
 </configure>
