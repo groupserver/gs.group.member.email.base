@@ -26,9 +26,11 @@ with codecs.open(os.path.join("docs", "HISTORY.txt"), encoding='utf-8') as f:
     long_description += '\n' + f.read()
 
 requires = [
+        'SQLAlchemy',
         'zope.cachedescriptors',
         'zope.component',  # For the ZCA, natch.
         'zope.interface',
+        'zope.sqlalchemy',
         'gs.database',
 ]
 if (sys.version_info < (3, 4)):

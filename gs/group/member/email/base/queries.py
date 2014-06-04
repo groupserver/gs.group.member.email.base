@@ -14,7 +14,7 @@
 ##############################################################################
 from __future__ import absolute_import, unicode_literals
 import sqlalchemy as sa
-#from zope.sqlalchemy import mark_changed
+from zope.sqlalchemy import mark_changed
 from gs.database import getTable, getSession
 
 
@@ -48,7 +48,7 @@ class GroupUserEmailQuery(object):
 
         session = getSession()
         session.execute(i, params=d)
-        #mark_changed(session)
+        mark_changed(session)
 
     def remove_groupUserEmail(self, email_address):
         uet = self.groupUserEmailTable
@@ -61,7 +61,7 @@ class GroupUserEmailQuery(object):
 
         session = getSession()
         session.execute(d)
-        #mark_changed(session)
+        mark_changed(session)
 
     def get_groupUserEmail(self, verified_only=True):
         guet = self.groupUserEmailTable
@@ -108,7 +108,7 @@ class GroupUserEmailQuery(object):
 
         session = getSession()
         session.execute(iOrU, params=d)
-        #mark_changed(session)
+        mark_changed(session)
 
     def clear_groupEmailSetting(self):
         est = self.emailSettingTable
@@ -120,7 +120,7 @@ class GroupUserEmailQuery(object):
 
         session = getSession()
         session.execute(d)
-        #mark_changed(session)
+        mark_changed(session)
 
     def get_groupEmailSetting(self):
         """ Given a site_id and group_id, check to see if the user
