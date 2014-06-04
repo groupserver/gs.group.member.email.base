@@ -27,7 +27,9 @@ with codecs.open(os.path.join("docs", "HISTORY.txt"), encoding='utf-8') as f:
 
 requires = [
         'zope.cachedescriptors',
-        'zope.component',
+        'zope.component',  # For the ZCA, natch.
+        'zope.interface',
+        'gs.database',
 ]
 if (sys.version_info < (3, 4)):
     requires += ['setuptools', 'enum34']
@@ -59,6 +61,8 @@ setup(name='gs.group.member.email.base',
     include_package_data=True,
     zip_safe=False,
     install_requires=requires,
+    test_suite='gs.group.member.email.base.test_all',
+    tests_require=['mock'],
     entry_points="""
     # -*- Entry points: -*-
     """,
