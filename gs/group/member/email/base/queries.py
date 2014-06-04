@@ -92,7 +92,7 @@ class GroupUserEmailQuery(object):
             raise ValueError("Unknown setting %s" % setting)
         est = self.emailSettingTable
         and_ = sa.and_
-        curr_setting = self.get_groupEmailSetting(self.siteId, self.groupId)
+        curr_setting = self.get_groupEmailSetting()
         if not curr_setting:
             iOrU = est.insert()
             d = {'user_id': self.userId,
