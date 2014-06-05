@@ -37,7 +37,6 @@ class GroupUserEmailQuery(object):
         assert self.groupId, 'Group ID not set'
         assert self.siteId, 'Site ID not set'
 
-    # TODO: https://redmine.iopen.net/issues/3563
     def add_groupUserEmail(self, email_address):
         uet = self.groupUserEmailTable
         i = uet.insert()
