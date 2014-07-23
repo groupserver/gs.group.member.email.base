@@ -7,9 +7,6 @@ CREATE TABLE email_setting (
     user_id   TEXT  NOT NULL,
     site_id   TEXT  NOT NULL DEFAULT ''::TEXT,
     group_id  TEXT  NOT NULL DEFAULT ''::TEXT,
-    setting   TEXT  NOT NULL
+    setting   TEXT  NOT NULL,
+    PRIMARY KEY (user_id, site_id, group_id)
 );
-
-CREATE UNIQUE INDEX email_setting_pkey 
-       ON email_setting 
-       USING BTREE(user_id, site_id, group_id);

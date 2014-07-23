@@ -8,7 +8,8 @@ CREATE TABLE group_user_email (
     user_id   TEXT  NOT NULL,
     site_id   TEXT  NOT NULL DEFAULT ''::TEXT,
     group_id  TEXT  NOT NULL,
-    email     TEXT  NOT NULL REFERENCES user_email(email) ON DELETE CASCADE ON UPDATE CASCADE
+    email     TEXT  NOT NULL REFERENCES user_email(email) ON DELETE CASCADE 
+                                                          ON UPDATE CASCADE
 );
 -- Note the lowered email-address is used in the index
 CREATE UNIQUE INDEX user_site_group_email_pkey 
