@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2013, 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,12 +11,12 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import absolute_import, unicode_literals
 from mock import MagicMock
 from unittest import TestCase
 from gs.group.member.email.base.groupemailuser import (GroupEmailUser,
-                                                        GroupEmailSetting)
+                                                       GroupEmailSetting)
 from gs.group.member.email.base.groupemailuser import GroupUserEmailQuery
 
 
@@ -75,7 +75,8 @@ class TestGroupEmailUser(TestCase):
     def test_get_delivery_setting_specific(self):
         'Test that the group-specific delivery setting works.'
         MockGUEQ = self.set_setting('asdfasdfasdf')
-        MockGUEQ.get_groupUserEmail = MagicMock(return_value=['eg@example.com'])
+        MockGUEQ.get_groupUserEmail = \
+            MagicMock(return_value=['eg@example.com'])
 
         groupEmailUser = GroupEmailUser(self.fauxUser, self.fauxGroup)
         r = groupEmailUser.get_delivery_setting()
@@ -91,17 +92,18 @@ class TestGroupEmailUser(TestCase):
         self.assertEqual([], r)
 
     def test_get_addresses_specific(self):
-        'Test that get_addresses returns the specific addresses when it should'
+        'Test that get_addresses returns the specific addresses'
         MockGUEQ = self.set_setting('asdfasdf')
         specificAddresses = ['eg@example.com']
-        MockGUEQ.get_groupUserEmail = MagicMock(return_value=specificAddresses)
+        MockGUEQ.get_groupUserEmail = \
+            MagicMock(return_value=specificAddresses)
 
         groupEmailUser = GroupEmailUser(self.fauxUser, self.fauxGroup)
         r = groupEmailUser.get_addresses()
         self.assertEqual(specificAddresses, r)
 
     def test_get_addresses_default(self):
-        'Test that get_addresses returns the default addresses when it should'
+        'Test that get_addresses returns the default addresses'
         MockGUEQ = self.set_setting('asdfasdf')
         defaultAddresses = ['eg@example.com']
         MockGUEQ.get_groupUserEmail = MagicMock(return_value=[])
@@ -111,7 +113,7 @@ class TestGroupEmailUser(TestCase):
         r = groupEmailUser.get_addresses()
         self.assertEqual(defaultAddresses, r)
         MockGUEQ.get_addresses.assert_called_once_with(preferredOnly=True,
-                                                        verifiedOnly=False)
+                                                       verifiedOnly=False)
 
     def test_set_digest(self):
         MockGUEQ = GroupUserEmailQuery
@@ -134,7 +136,7 @@ class TestGroupEmailUser(TestCase):
         MockGUEQ.set_groupEmailSetting.assert_called_once_with('webonly')
 
     def test_set_default_delivery_no_specific_email(self):
-        'Test set_default_delivery when the default email addresses are used'
+        'Test set_default_delivery with the default email addresses'
         MockGUEQ = self.set_setting('asdfasdf')
         MockGUEQ.get_groupUserEmail = MagicMock(return_value=[])
         MockGUEQ.remove_groupUserEmail = MagicMock()
@@ -147,9 +149,10 @@ class TestGroupEmailUser(TestCase):
         self.assertEqual(0, MockGUEQ.remove_groupUserEmail.call_count)
 
     def test_set_default_delivery_specific_email(self):
-        'Test set_default_delivery when the specific email addresses are used'
+        'Test set_default_delivery with the specific email addresses'
         MockGUEQ = self.set_setting('asdfasdf')
-        MockGUEQ.get_groupUserEmail = MagicMock(return_value=['eg@example.com'])
+        MockGUEQ.get_groupUserEmail = \
+            MagicMock(return_value=['eg@example.com'])
         MockGUEQ.remove_groupUserEmail = MagicMock()
         MockGUEQ.clear_groupEmailSetting = MagicMock()
 
