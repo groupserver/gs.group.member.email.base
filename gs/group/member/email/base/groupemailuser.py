@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2013, 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,7 +11,7 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import absolute_import, unicode_literals
 from zope.cachedescriptors.property import Lazy
 from .queries import GroupUserEmailQuery
@@ -80,7 +80,7 @@ class GroupEmailUser(object):
     def get_preferred_email_addresses(self):
         'Get the preferred email addresses of a group member.'
         retval = self.query.get_addresses(preferredOnly=True,
-                                            verifiedOnly=False)
+                                          verifiedOnly=False)
         return retval
 
     def set_digest(self):
