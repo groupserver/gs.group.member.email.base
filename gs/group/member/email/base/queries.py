@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2013, 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,7 +11,7 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import absolute_import, unicode_literals
 import sqlalchemy as sa
 from zope.sqlalchemy import mark_changed
@@ -100,8 +100,10 @@ class GroupUserEmailQuery(object):
                  'setting': setting}
 
         else:
-            iOrU = est.update(and_(est.c.user_id == self.context.getUserName(),
-                                   est.c.site_id == self.siteId,
+            uid = self.context.getUserName()
+            iOrU = est.update(and_(est.c.user_id == uid,
+                                   sa.or_(est.c.site_id == self.siteId,
+                                          est.c.site_id == ''),
                                    est.c.group_id == self.groupId))
             d = {'setting': setting, }
 
@@ -114,7 +116,8 @@ class GroupUserEmailQuery(object):
         and_ = sa.and_
 
         d = est.delete(and_(est.c.user_id == self.userId,
-                            est.c.site_id == self.siteId,
+                            sa.or_(est.c.site_id == self.siteId,
+                                   est.c.site_id == ''),
                             est.c.group_id == self.groupId))
 
         session = getSession()
@@ -127,7 +130,10 @@ class GroupUserEmailQuery(object):
         est = self.emailSettingTable
         s = est.select()
         s.append_whereclause(est.c.user_id == self.userId)
-        s.append_whereclause(est.c.site_id == self.siteId)
+        # --=mpj17=-- Due to historical quirks, the site_id can be a bit
+        # odd.
+        s.append_whereclause(sa.or_(est.c.site_id == self.siteId,
+                                    est.c.site_id == ''))
         s.append_whereclause(est.c.group_id == self.groupId)
 
         session = getSession()
