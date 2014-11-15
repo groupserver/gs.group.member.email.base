@@ -100,8 +100,7 @@ class GroupUserEmailQuery(object):
                  'setting': setting}
 
         else:
-            uid = self.context.getUserName()
-            iOrU = est.update(and_(est.c.user_id == uid,
+            iOrU = est.update(and_(est.c.user_id == self.userId,
                                    sa.or_(est.c.site_id == self.siteId,
                                           est.c.site_id == ''),
                                    est.c.group_id == self.groupId))
